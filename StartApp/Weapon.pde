@@ -42,6 +42,9 @@ class Projectile implements Drawable,Movable{
   }
   
   public void display(){
+    fill(255,40,40);
+    stroke(255,40,40);
+    strokeWeight(5);
     ellipse(this.postiones.x, this.postiones.y, size, size);
   }
 }

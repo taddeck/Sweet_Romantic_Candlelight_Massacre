@@ -1,6 +1,7 @@
 class CuddleMuffin implements Drawable,Movable{
 PVector pos;
 PVector speed;
+
 float speedyspeed = 0.001;
 float speedyspeedreducer = 100;
 int size = 20;
