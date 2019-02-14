@@ -28,26 +28,27 @@ class Projectile implements Movable, Drawable{
   private PVector pos;
   private PVector targetPos;
   private float size;
-  private double speed;
+  private float speed;
   private PVector direc;
   
   
   
   
-  public Projectile(PVector playerPos, PVector curserPos, double speed, float size){
+  public Projectile(PVector playerPos, PVector curserPos, float speed, float size){
     
     this.pos = playerPos;
+    this.targetPos = curserPos;
     this.speed = speed;
     this.size = size;
     
-    this.direc = (this.pos.sub(this.targetPos)).normalize();
+    this.direc = (this.targetPos.sub(this.pos)).normalize();
     
   }
   
   
   public void move(){
     
-    this.pos.add(this.direc);
+    this.pos.add(this.direc.mult(speed));
     
   }
   

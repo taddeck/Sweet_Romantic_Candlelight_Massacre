@@ -30,6 +30,11 @@ void mousePressed(){
   muffi.speed = dir.mult(-1);
   System.out.println(mouseX + " " + mouseY);
   System.out.println(muffi.speed.toString());
+  
+  Projectile pr = new Projectile(muffi.pos, new PVector(mouseX - width/2 - muffi.pos.x, mouseY - height/2 - muffi.pos.y), 0.5, 20);
+  
+  drawables.add(pr);
+  movables.add(pr);
 }
 
 void keyPressed() {
