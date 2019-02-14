@@ -9,7 +9,6 @@ public void setup(){
   size(800,800);
   translate(width/2,height/2);
   muffi = new CuddleMuffin();
-
   drawables.add(muffi);
   movables.add(muffi);
 }
@@ -18,15 +17,17 @@ public void draw(){
    translate(width/2,height/2);
    background(255);
    for(Movable movable: movables){
-    // movable.move();
+     movable.move();
    }
    for(Drawable sprite: drawables){
-   //  sprite.draw();
+    sprite.display();
    }
-    for(Projectile projectile: projec){
-     projectile.draw();
-     projectile.move();
+   for(Projectile proj : projec){
+     proj.display();
+     proj.move();
    }
+   
+
 }
 
 void mousePressed(){
@@ -34,7 +35,7 @@ void mousePressed(){
   dir = dir.normalize().mult(5);
   muffi.speed = dir.mult(-1);
   
-  projec.add(new Projectile(muffi.pos, new PVector(mouseX, mouseY), 1, 20));
+ projec.add(new Projectile(muffi.pos.x,muffi.pos.y));
 }
 
 void keyPressed() {

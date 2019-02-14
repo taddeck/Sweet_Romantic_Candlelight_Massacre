@@ -1,7 +1,7 @@
 class CuddleMuffin implements Drawable,Movable{
 PVector pos;
 PVector speed;
-float speedyspeed = 0.7;
+float speedyspeed = 0.001;
 float speedyspeedreducer = 100;
 int size = 20;
 float speedreducerino = 1;
@@ -11,24 +11,12 @@ public CuddleMuffin(){
   pos = new PVector(0,0);
   speed = new PVector(0,0);
 }
-
-void draw(){
+    
+void display(){
   rect(pos.x,pos.y,size,size);
 }
 
-void move(){
-   if(isUp){
-     speed.y -= speedyspeed;
-   }
-   if(isLeft){
-     speed.x -= speedyspeed;
-   }
-   if(isDown){
-     speed.y += speedyspeed;
-   }
-   if(isRight){
-     speed.x += speedyspeed;
-   }
+public void move(){
 
  speed.x -= speed.x/speedyspeedreducer;
  speed.y -= speed.y/speedyspeedreducer;

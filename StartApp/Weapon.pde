@@ -23,37 +23,27 @@ class Mercury extends Weapon{
   
 }
 
-class Projectile{
+class Projectile implements Drawable,Movable{
  
-  private PVector pos;
+  private PVector postiones;
   private PVector targetPos;
-  private float size;
+  private float size = 10;
   private float speed;
   private PVector direc;
   
-  
-  
-  
-  public Projectile(PVector playerPos, PVector curserPos, float speed, float size){
-    
-    this.pos = playerPos;
-    this.targetPos = curserPos;
-    this.speed = speed;
-    this.size = size;
-    
-    this.direc = this.targetPos.sub(this.pos).normalize();
-    
+  public Projectile(float playerPosx,float playerPosy){
+    postiones = new PVector(playerPosx,playerPosy);
+    this.direc = new PVector(mouseX - width/2 - playerPosx,mouseY - height/2 - playerPosy).normalize();
   }
-  
   
   public void move(){
-    this.pos.add(this.direc.mult(-speed));
+    PVector blabla = new PVector(direc.x,direc.y);
+    postiones.add(blabla.mult(10));
   }
   
-  public void draw(){
-    ellipse(this.pos.x, this.pos.y, this.size, this.size);
+  public void display(){
+    ellipse(this.postiones.x, this.postiones.y, size, size);
   }
-  
 }
 
 
