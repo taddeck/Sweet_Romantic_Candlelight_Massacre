@@ -87,7 +87,7 @@ boolean s = false;
 boolean plus = false;
 boolean minus = false;
 
-Star[] stars = new Star[600];
+Star[] stars = new Star[300];
 
 void stars(){
   background(0);
