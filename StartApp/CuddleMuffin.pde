@@ -3,10 +3,10 @@ float xoff = 0.0;
 float yoff = 0.0;
 PVector pos;
 PVector speed;
-float speedyspeed = 0.4;
-float speedyspeedreducer = 15;
+float speedyspeed = 0.7;
+float speedyspeedreducer = 100;
 int size = 20;
-float friction = 0.5;
+float speedreducerino = 1;
 public boolean isLeft, isRight, isUp, isDown;
 public CuddleMuffin(){
   pos = new PVector(0,0);
