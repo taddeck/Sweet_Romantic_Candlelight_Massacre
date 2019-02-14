@@ -3,6 +3,7 @@ int width = 800;
 int height = 800;
 ArrayList<Drawable> drawables = new ArrayList<Drawable>();
 ArrayList<Movable> movables = new ArrayList<Movable>();
+
 public void setup(){
   size(800,800);
   translate(width/2,height/2);
@@ -21,8 +22,14 @@ public void draw(){
    for(Drawable sprite: drawables){
      sprite.draw();
    }
+}
 
-
+void mousePressed(){
+  PVector dir = new PVector(mouseX - width/2 - muffi.pos.x,mouseY - height/2 - muffi.pos.y);
+  dir = dir.normalize().mult(5);
+  muffi.speed = dir.mult(-1);
+  System.out.println(mouseX + " " + mouseY);
+  System.out.println(muffi.speed.toString());
 }
 
 void keyPressed() {
