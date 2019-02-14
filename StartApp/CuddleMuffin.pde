@@ -1,12 +1,11 @@
 class CuddleMuffin implements Drawable,Movable{
-float xoff = 0.0;
-float yoff = 0.0;
 PVector pos;
 PVector speed;
 float speedyspeed = 0.7;
 float speedyspeedreducer = 100;
 int size = 20;
 float speedreducerino = 1;
+int lebensenergiebalkenzuverfuegung = 5;
 public boolean isLeft, isRight, isUp, isDown;
 public CuddleMuffin(){
   pos = new PVector(0,0);
@@ -14,7 +13,6 @@ public CuddleMuffin(){
 }
 
 void draw(){
-  xoff += 0.1;
   rect(pos.x,pos.y,size,size);
 }
 
