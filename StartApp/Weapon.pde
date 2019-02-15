@@ -33,7 +33,7 @@ class Projectile implements Drawable,Movable{
   
   public Projectile(float playerPosx,float playerPosy){
     postiones = new PVector(playerPosx,playerPosy);
-    this.direc = new PVector(mouseX - width/2 - playerPosx,mouseY - height/2 - playerPosy).normalize();
+    this.direc = new PVector(mouseX - pixelWidth/2,mouseY - pixelHeight/2).normalize();
   }
   
   public void move(){
