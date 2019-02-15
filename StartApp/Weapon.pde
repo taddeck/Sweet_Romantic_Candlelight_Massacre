@@ -3,17 +3,17 @@ class Projectile implements Drawable,Movable{
   
   private HashMap<String, Integer> planet = new HashMap<String, Integer>();
   private PVector postiones;
-  private PVector targetPos;
   private float size;
   private float speed;
   private PVector direc;
   private double increase;
-  private boolean isspread;
   private boolean isChangening;
+  private boolean isspread;
+  private float damage;
   
   
   public Projectile(float playerPosx,float playerPosy, String planet){
-      
+        
       this.isChangening = false;
       this.size = 10;
       this.isspread = false;
@@ -23,9 +23,10 @@ class Projectile implements Drawable,Movable{
       
      
        switch(planet){
-        
          
          case "Mercury": 
+           this.damage = 1;
+           this.size = 10;
            this.speed = 10;
            break;
            
@@ -34,6 +35,7 @@ class Projectile implements Drawable,Movable{
            break;
 
          case "Earth":
+           this.damage = 2;
            this.size = 5;
            this.isChangening = true;
            this.increase = 2;
@@ -41,7 +43,8 @@ class Projectile implements Drawable,Movable{
            break;
 
          case "Mars":
-           this.increase = 2;
+           this.damage = 3;
+           this.increase = 4;
            this.speed = 10;
            break;
            
@@ -50,6 +53,7 @@ class Projectile implements Drawable,Movable{
            break;
            
          case "Saturn":
+           this.damage = 2;
            this.isspread = true;
            this.speed = 10;
            break;
@@ -60,16 +64,15 @@ class Projectile implements Drawable,Movable{
            break;  
            
          case "Neptune":
+           this.damage = 0.5; 
            this.speed = 20;
            this.increase = 5;
-           
            break;  
            
-
          default: 
-           this.speed = 10;
+           
+            this.speed = 10;
             break;
-         
          
        }
        
@@ -88,13 +91,22 @@ class Projectile implements Drawable,Movable{
     this.size += this.increase;
     
     if(this.isChangening) if(frameCount % 30 == 0) this.increase *= (-1);
-    println(this.increase);
     
     fill(255,40,40);
     stroke(255,40,40);
     strokeWeight(5);
     ellipse(this.postiones.x, this.postiones.y, size, size);
   }
+  
+  
+  public float getDamage(){
+   return this.damage; 
+  }
+  
+  public PVector getPos(){
+    return this.postiones;
+  }
+  
 }
 
 

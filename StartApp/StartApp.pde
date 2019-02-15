@@ -4,8 +4,10 @@ ArrayList<Movable> movables = new ArrayList<Movable>();
 ArrayList<Projectile> projec = new ArrayList<Projectile>();
 private int shootCount;
 private int fireRate;
+private float acc;
 
 public void setup(){
+  this.acc = 1;
   this.shootCount = 10000;
   this.fireRate = 2;
   size(1500,1500);
@@ -20,6 +22,21 @@ public void setup(){
 }
 
 public void draw(){
+  
+  setWeapon("Mercury");
+  
+  if(mousePressed){
+        
+    if(this.shootCount > this.fireRate){
+     projec.add(new Projectile(muffi.pos.x,muffi.pos.y, "Mercury"));
+     
+     dir = getCurrentdir();
+     dir = dir.normalize().mult(5);
+     muffi.speed = dir.mult(-this.acc);
+     
+     this.shootCount = 0;
+    }
+  }
   
    this.shootCount++;
    translate(width/2,height/2);
@@ -40,15 +57,8 @@ public void draw(){
   PVector dir;
   
 void mousePressed(){
-  dir = getCurrentdir();
-  dir = dir.normalize().mult(5);
-  muffi.speed = dir.mult(-1);
   
-  if(this.shootCount > this.fireRate){
-   projec.add(new Projectile(muffi.pos.x,muffi.pos.y, "Neptune"));
-   this.shootCount = 0;
-  }
- 
+  
 }
 
 PVector getCurrentdir(){
@@ -89,21 +99,22 @@ void setWeapon(String planet){
  
     switch(planet){
         
-         
          case "Mercury": 
-           this.fireRate = 20;
+           this.fireRate = 15;
+           this.acc = 0.5;
            break;
            
          case "Venus":
-
            break;
 
          case "Earth":
            this.fireRate = 30;
+           this.acc = 1;
            break;
 
          case "Mars":
            this.fireRate = 60;
+           this.acc = 2;
            break;
            
          case "Jupiter":
@@ -116,7 +127,6 @@ void setWeapon(String planet){
            
          case "Uranus":
            this.fireRate = 30;
-          
            break;  
            
          case "Neptune":
