@@ -14,6 +14,7 @@ class Projectile implements Drawable,Movable{
   
   public Projectile(float playerPosx,float playerPosy, String planet){
       
+      
       this.isChangening = false;
       this.size = 10;
       this.isspread = false;
@@ -60,8 +61,7 @@ class Projectile implements Drawable,Movable{
            break;  
            
          case "Neptune":
-           this.speed = 20;
-           this.increase = 5;
+           
            
            break;  
            

@@ -2,12 +2,8 @@ CuddleMuffin muffi;
 ArrayList<Drawable> drawables = new ArrayList<Drawable>();
 ArrayList<Movable> movables = new ArrayList<Movable>();
 ArrayList<Projectile> projec = new ArrayList<Projectile>();
-private int shootCount;
-private int fireRate;
 
 public void setup(){
-  this.shootCount = 10000;
-  this.fireRate = 2;
   size(1500,1500);
   translate(width/2,height/2);
   muffi = new CuddleMuffin();
@@ -20,8 +16,6 @@ public void setup(){
 }
 
 public void draw(){
-  
-   this.shootCount++;
    translate(width/2,height/2);
    stars();
    for(Movable movable: movables){
@@ -40,14 +34,13 @@ public void draw(){
   PVector dir;
   
 void mousePressed(){
-  dir = getCurrentdir();
-  dir = dir.normalize().mult(5);
-  muffi.speed = dir.mult(-1);
-  
-  if(this.shootCount > this.fireRate){
-   projec.add(new Projectile(muffi.pos.x,muffi.pos.y, "Neptune"));
-   this.shootCount = 0;
-  }
+    dir = getCurrentdir();
+    dir = dir.normalize().mult(5);
+    muffi.speed = dir.mult(-1);
+    
+    
+    projec.add(new Projectile(muffi.pos.x,muffi.pos.y, "Mars"));
+ 
  
 }
 
@@ -81,57 +74,6 @@ boolean setMove(int k, boolean b) {
   default:
     return b;
   }
-}
-
-
-
-void setWeapon(String planet){
- 
-    switch(planet){
-        
-         
-         case "Mercury": 
-           this.fireRate = 20;
-           break;
-           
-         case "Venus":
-
-           break;
-
-         case "Earth":
-           this.fireRate = 30;
-           break;
-
-         case "Mars":
-           this.fireRate = 60;
-           break;
-           
-         case "Jupiter":
-           this.fireRate = 30;
-           break;
-           
-         case "Saturn":
-          this.fireRate = 60;
-           break;
-           
-         case "Uranus":
-           this.fireRate = 30;
-          
-           break;  
-           
-         case "Neptune":
-           this.fireRate = 5;
-           
-           break;  
-           
-
-         default: 
-           
-            break;
-         
-         
-       }
-  
 }
 
 
