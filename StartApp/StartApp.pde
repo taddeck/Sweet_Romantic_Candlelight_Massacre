@@ -1,12 +1,10 @@
 CuddleMuffin muffi;
-int width = 800;
-int height = 800;
 ArrayList<Drawable> drawables = new ArrayList<Drawable>();
 ArrayList<Movable> movables = new ArrayList<Movable>();
 ArrayList<Projectile> projec = new ArrayList<Projectile>();
 
 public void setup(){
-  size(800,800);
+  size(1500,1500);
   translate(width/2,height/2);
   muffi = new CuddleMuffin();
   drawables.add(muffi);
@@ -34,12 +32,13 @@ public void draw(){
 
 }
   PVector dir;
+  
 void mousePressed(){
 dir = getCurrentdir();
   dir = dir.normalize().mult(5);
   muffi.speed = dir.mult(-1);
   
- projec.add(new Projectile(muffi.pos.x,muffi.pos.y));
+ projec.add(new Projectile(muffi.pos.x,muffi.pos.y, "Mars"));
 }
 
 PVector getCurrentdir(){
