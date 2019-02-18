@@ -5,8 +5,10 @@ ArrayList<Projectile> projec = new ArrayList<Projectile>();
 private int shootCount;
 private int fireRate;
 private float acc;
+private String weapon;
 
 public void setup(){
+  this.weapon = "Earth";
   this.acc = 1;
   this.shootCount = 10000;
   this.fireRate = 2;
@@ -25,10 +27,12 @@ public void draw(){
   
   setWeapon("Mercury");
   
+  
+  //Firerate and conditional recoil
   if(mousePressed){
         
     if(this.shootCount > this.fireRate){
-     projec.add(new Projectile(muffi.pos.x,muffi.pos.y, "Mercury"));
+     projec.add(new Projectile(muffi.pos.x,muffi.pos.y, weapon));
      
      dir = getCurrentdir();
      dir = dir.normalize().mult(5);
@@ -36,9 +40,10 @@ public void draw(){
      
      this.shootCount = 0;
     }
+    
   }
   
-   this.shootCount++;
+   this.shootCount++; 
    translate(width/2,height/2);
    stars();
    for(Movable movable: movables){
@@ -94,7 +99,7 @@ boolean setMove(int k, boolean b) {
 }
 
 
-
+//Sets the weapon to and corresponding firerate
 void setWeapon(String planet){
  
     switch(planet){
@@ -102,44 +107,46 @@ void setWeapon(String planet){
          case "Mercury": 
            this.fireRate = 15;
            this.acc = 0.5;
+           this.weapon = "Mercury"; 
            break;
            
          case "Venus":
+           this.weapon = "Venus";
            break;
 
          case "Earth":
+           this.weapon = "Earth";
            this.fireRate = 30;
            this.acc = 1;
            break;
 
          case "Mars":
+           this.weapon = "Mars";
            this.fireRate = 60;
            this.acc = 2;
            break;
            
          case "Jupiter":
+           this.weapon = "Jupiter";
            this.fireRate = 30;
            break;
            
          case "Saturn":
-          this.fireRate = 60;
+           this.weapon = "Saturn";
+           this.fireRate = 60;
            break;
            
          case "Uranus":
+           this.weapon = "uranus";
            this.fireRate = 30;
            break;  
            
          case "Neptune":
+           this.weapon = "Neptune";
            this.fireRate = 5;
            
            break;  
            
-
-         default: 
-           
-            break;
-         
-         
        }
   
 }
