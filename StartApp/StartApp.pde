@@ -1,21 +1,26 @@
 CuddleMuffin muffi;
-int width = 3860;
-int height = 2160;
 ArrayList<Drawable> drawables = new ArrayList<Drawable>();
 ArrayList<Movable> movables = new ArrayList<Movable>();
 ArrayList<Projectile> projec = new ArrayList<Projectile>();
 PImage img;
 float roff,goff,boff;
 float raff,gaff,baff;
+private int shootCount;
+private int fireRate;
+private float acc;
+
 public void setup(){
-  size(3860,2160);
+  size(2440,1440);
     img = loadImage("herzchen.png");
   smooth();
    muffi = new CuddleMuffin();
   roff = 100;
   goff=200;
   boff=300;
- 
+  this.acc = 1;
+  this.shootCount = 10000;
+  this.fireRate = 2;
+  muffi = new CuddleMuffin();
   drawables.add(muffi);
   movables.add(muffi);
   for(int i=0; i<stars.length; i++){
@@ -31,6 +36,26 @@ public void draw(){
   raff = noise(roff);
   baff = noise(boff);
   gaff = noise(goff);
+  setWeapon("Mercury");
+  
+  if(mousePressed){
+        
+    if(this.shootCount > this.fireRate){
+     projec.add(new Projectile(muffi.pos.x,muffi.pos.y, "Mercury"));
+     
+     dir = getCurrentdir();
+     dir = dir.normalize().mult(5);
+     muffi.speed = dir.mult(-this.acc);
+     
+     this.shootCount = 0;
+    }
+  }
+  
+   this.shootCount++;
+   stars();
+   for(Movable movable: movables){
+     movable.move();
+   }
   
   translate(-muffi.pos.x + pixelWidth/2,-muffi.pos.y + pixelHeight/2);
   //    translate(-muffi.pos.x,-muffi.pos.y++ );
@@ -53,15 +78,66 @@ public void draw(){
 
 }
   PVector dir;
+  
 void mousePressed(){
   dir = getCurrentdir().normalize().mult(5);
   muffi.speed = dir.mult(-1);
   
- projec.add(new Projectile(muffi.pos.x,muffi.pos.y));
 }
 
 PVector getCurrentdir(){
   return new PVector( mouseX-pixelWidth/2 ,mouseY-pixelHeight/2);
+}
+
+
+
+void setWeapon(String planet){
+ 
+    switch(planet){
+        
+         case "Mercury": 
+           this.fireRate = 15;
+           this.acc = 0.5;
+           break;
+           
+         case "Venus":
+           break;
+
+         case "Earth":
+           this.fireRate = 30;
+           this.acc = 1;
+           break;
+
+         case "Mars":
+           this.fireRate = 60;
+           this.acc = 2;
+           break;
+           
+         case "Jupiter":
+           this.fireRate = 30;
+           break;
+           
+         case "Saturn":
+          this.fireRate = 60;
+           break;
+           
+         case "Uranus":
+           this.fireRate = 30;
+           break;  
+           
+         case "Neptune":
+           this.fireRate = 5;
+           
+           break;  
+           
+
+         default: 
+           
+            break;
+         
+         
+       }
+  
 }
 
 
@@ -105,9 +181,9 @@ class Star{
   Star(){
     z = random(pixelWidth);
     starsize = (int)random(20);
-    red = random(100);
-    blue = random(100);
-    green = random(100);
+    red = random(200);
+    blue = random(200);
+    green = random(200);
     reset();
   }
   
@@ -135,7 +211,7 @@ class Star{
     
   void show(){
     noStroke();
-     fill(180 ,180 ,0,10);
+     fill(red ,green ,blue,30);
     
     sx = map(x / z, 0,1, 0+muffi.pos.x,width+muffi.pos.x);
     sy = map(y / z, 0,1, 0+muffi.pos.y,height+muffi.pos.y);
