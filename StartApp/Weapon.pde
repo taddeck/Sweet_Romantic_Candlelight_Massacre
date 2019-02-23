@@ -10,24 +10,26 @@ class Projectile implements Drawable,Movable{
   private boolean isChangening;
   private boolean isspread;
   private float damage;
+  private PVector playerHead;
   
   
-  public Projectile(float playerPosx,float playerPosy, String planet){
+  public Projectile(PVector playerPos, PVector playerHead, String planet){
         
+      this.direc = new PVector(mouseX - width/2,mouseY - height/2).normalize();
       this.isChangening = false;
       this.size = 10;
       this.isspread = false;
       this.increase = 0;
-      postiones = new PVector(playerPosx,playerPosy);
-      PVector targetPos = new PVector(mouseX, mouseY);
+      this.postiones = playerPos.copy();
+      this.playerHead = playerHead.copy();
       
-     
+      
        switch(planet){
          
          case "Mercury": 
            this.damage = 1;
            this.size = 10;
-           this.speed = 10;
+           this.speed = 30;
            break;
            
          case "Venus":
@@ -36,57 +38,57 @@ class Projectile implements Drawable,Movable{
 
          case "Earth":
            this.damage = 2;
-           this.size = 5;
+           this.size = 30;
            this.isChangening = true;
            this.increase = 2;
-           this.speed = 10;
+           this.speed = 30;
            break;
 
          case "Mars":
            this.damage = 3;
            this.increase = 4;
-           this.speed = 10;
+           this.speed = 30;
            break;
            
          case "Jupiter":
-           this.speed = 10;
+           this.speed = 30;
            break;
            
          case "Saturn":
            this.damage = 2;
            this.isspread = true;
-           this.speed = 10;
+           this.speed =30;
            break;
            
          case "Uranus":
          
-           this.speed = 10;
+           this.speed = 30;
            break;  
            
          case "Neptune":
            this.damage = 0.5; 
-           this.speed = 20;
+           this.speed = 30;
            this.increase = 5;
            break;  
            
          default: 
            
-            this.speed = 10;
+            this.speed = 30;
             break;
          
        }
        
-       this.direc = new PVector(mouseX - width/2 - playerPosx,mouseY - height/2 - playerPosy).normalize();
+       
   }
   
   public void display(){
-     image(img,this.postiones.x,this.postiones.y,64,64);
+     image(img,this.postiones.x,this.postiones.y,size,size);
 
   }
   
   public void move(){
     PVector temp = new PVector(direc.x,direc.y);
-    postiones.add(temp.mult(this.speed));
+    postiones.add(temp.mult(this.speed).add(this.playerHead));
   }
   
   /* public void display(){

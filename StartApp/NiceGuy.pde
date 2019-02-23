@@ -9,7 +9,7 @@ class NiceGuy implements Drawable{
    this.playerPos = playerPos;
    this.pos = randomPos();
    this.health = 3;
-   print(this.pos.x + " " + this.pos.y);
+   
   }
   
   

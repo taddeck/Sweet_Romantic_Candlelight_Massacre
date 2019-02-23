@@ -8,12 +8,14 @@ float raff,gaff,baff;
 private int shootCount;
 private int fireRate;
 private float acc;
+private int starMax;
 
 public void setup(){
   size(2440,1440);
     img = loadImage("herzchen.png");
   smooth();
    muffi = new CuddleMuffin();
+  stars = new Star[100];
   roff = 100;
   goff=200;
   boff=300;
@@ -30,25 +32,27 @@ public void setup(){
 }
 
 public void draw(){
+  background(0);
   roff+=0.5;
   boff+=0.5;
   goff+=0.5;
   raff = noise(roff);
   baff = noise(boff);
   gaff = noise(goff);
-  setWeapon("Mercury");
+  setWeapon("Earth");
   
   if(mousePressed){
         
     if(this.shootCount > this.fireRate){
-     projec.add(new Projectile(muffi.pos.x,muffi.pos.y, "Mercury"));
-     
-     dir = getCurrentdir();
-     dir = dir.normalize().mult(5);
-     muffi.speed = dir.mult(-this.acc);
-     this.shootCount = 0;
-     
-     drawables.add(new NiceGuy(muffi.pos));
+       
+       projec.add(new Projectile(muffi.pos, muffi.speed , "Earth"));
+       
+       dir = getCurrentdir();
+       dir = dir.normalize().mult(5);
+       muffi.speed = dir.mult(-this.acc);
+       this.shootCount = 0;
+       
+       drawables.add(new NiceGuy(muffi.pos));
      
     }
   }
@@ -80,11 +84,7 @@ public void draw(){
 }
   PVector dir;
   
-void mousePressed(){
-  dir = getCurrentdir().normalize().mult(5);
-  muffi.speed = dir.mult(-1);
-  
-}
+
 
 PVector getCurrentdir(){
   return new PVector( mouseX-pixelWidth/2 ,mouseY-pixelHeight/2);
@@ -154,10 +154,10 @@ boolean s = false;
 boolean plus = false;
 boolean minus = false;
 
-Star[] stars = new Star[400];
+Star[] stars;
 
 void stars(){
-  background(0);
+  
   
   for(int i=0; i<stars.length; i++){
     stars[i].move();
@@ -189,17 +189,37 @@ class Star{
   }
   
   void reset(){
-    x = (int)(random(-pixelWidth+muffi.pos.x,pixelWidth+muffi.pos.x));
-    y = (int)(random(-pixelHeight+ muffi.pos.y,pixelHeight+ muffi.pos.y));
+    
+    
+    
+    x = (int)(random(muffi.pos.x + width));
+    y = (int)(random(muffi.pos.y + height));
+    
+    
     pz = z;
   }
   
   boolean timeToReset(){
     if(z < 1){
       return true;
+    } else if(outOfView()){
+      
+       return true;
+      
     } else {
       return false;
     }
+    
+    
+    
+  }
+  
+  boolean outOfView(){
+   
+    if(sx < (muffi.pos.x - ((width / 2) + 100)) || sx > (muffi.pos.x + ((width / 2) + 100)) || sy < (muffi.pos.y - (height / 2) - 100)
+        || sy > (muffi.pos.y + (height / 2) + 100)) return true;
+    else return false;
+   
   }
   
   void move(){
@@ -214,8 +234,8 @@ class Star{
     noStroke();
      fill(red ,green ,blue,30);
     
-    sx = map(x / z, 0,1, 0+muffi.pos.x,width+muffi.pos.x);
-    sy = map(y / z, 0,1, 0+muffi.pos.y,height+muffi.pos.y);
+    sx = map(x / z, 0,1, muffi.pos.x - (width / 2), muffi.pos.x + (width / 2));
+    sy = map(y / z, 0,1, muffi.pos.y - (height / 2), muffi.pos.y + (height / 2));
     size = 3;
   for(int i = starsize;i > 0; --i){
       
