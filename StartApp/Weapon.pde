@@ -38,14 +38,12 @@ class Projectile implements Drawable,Movable{
   
   public void move(){
     PVector blabla = new PVector(direc.x,direc.y);
-    postiones.add(blabla.mult(10));
+    postiones.add(blabla.mult(50));
   }
   
   public void display(){
-    fill(255,40,40);
-    stroke(255,40,40);
-    strokeWeight(5);
-    ellipse(this.postiones.x, this.postiones.y, size, size);
+     image(img,this.postiones.x,this.postiones.y,64,64);
+
   }
 }
 
