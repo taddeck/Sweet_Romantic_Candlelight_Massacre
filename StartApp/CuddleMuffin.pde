@@ -13,6 +13,7 @@ public CuddleMuffin(){
   speed = new PVector(0,0);
 }
     
+   
 void display(){
   rect(pos.x,pos.y,size,size);
 }
