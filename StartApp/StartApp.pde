@@ -139,7 +139,7 @@ class Star{
     
     sx = map(x / z, 0,1, 0+muffi.pos.x,width+muffi.pos.x);
     sy = map(y / z, 0,1, 0+muffi.pos.y,height+muffi.pos.y);
-    size = 5;
+    size = 3;
   for(int i = starsize;i > 0; --i){
       
     ellipse(sx,sy,size*i,size*i);
