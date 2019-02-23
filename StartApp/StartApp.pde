@@ -46,11 +46,13 @@ public void draw(){
      dir = getCurrentdir();
      dir = dir.normalize().mult(5);
      muffi.speed = dir.mult(-this.acc);
-     
      this.shootCount = 0;
+     
+     drawables.add(new NiceGuy(muffi.pos));
+     
     }
   }
-  
+
    this.shootCount++;
    stars();
    for(Movable movable: movables){
@@ -74,7 +76,6 @@ public void draw(){
      proj.display();
      proj.move();
    }
-   
 
 }
   PVector dir;

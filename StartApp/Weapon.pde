@@ -78,6 +78,7 @@ class Projectile implements Drawable,Movable{
        
        this.direc = new PVector(mouseX - width/2 - playerPosx,mouseY - height/2 - playerPosy).normalize();
   }
+  
   public void display(){
      image(img,this.postiones.x,this.postiones.y,64,64);
 
