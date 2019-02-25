@@ -14,6 +14,7 @@ public CuddleMuffin(){
 }
     
 void display(){
+  fill(255, 255, 255);
   rect(pos.x,pos.y,size,size);
 }
 
