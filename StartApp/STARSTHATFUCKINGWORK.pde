@@ -1,5 +1,6 @@
+
+//Datastructure for holding stars
 class Stars{
-  
   
   Stars(int starNum, PVector playerPos){
     
@@ -7,38 +8,30 @@ class Stars{
       
       Star star = new Star(playerPos);
       drawables.add(star);
-      movables.add(star);
-      
+      movables.add(star); 
     }
-    
-    
   }
-  
-  
   
 }
 
-
+//actual stars
 class Star implements Drawable, Movable{
   
-  PVector pos;
-  PVector playerPos;
-  float depth; //simulated through size
-  float increase; //increase in size per frame
-  float speed; //speed increase per frame, simulates the relative view speed aka the more to the edge the faster
+  private PVector pos;
+  private PVector playerPos;
+  private float depth; //simulated through size
+  private float increase; //increase in size per frame
+  private float speed; //speed increase per frame, simulates the relative view speed aka the more to the edge the faster
 
-  
   
   Star(PVector playerPos){
     
     this.playerPos = playerPos;
     this.reset();
-    
   }
   
-  
-  
-  PVector genSpawnPos(){
+  //generates the spawnpositon based on the playerposition
+  private PVector genSpawnPos(){
     
     int x = (int)random(this.playerPos.x - width + 1, this.playerPos.x + width);
     int y = (int)random(this.playerPos.y - height + 1, this.playerPos.y + height);
@@ -66,22 +59,18 @@ class Star implements Drawable, Movable{
        this.depth += this.increase;
        this.pos.add( (this.pos.copy().sub(this.playerPos.copy())).normalize().mult(this.speed));
        this.speed += 0.002;
-       
-       
      }
-    
   }
   
   
   
-  
+  //resets the position
   void reset(){
     
     this.depth = random(5);
     this.pos = genSpawnPos();
     this.increase = random(0.1);
     this.speed = random(2, 4);
-    
   }
   
   
@@ -102,11 +91,6 @@ class Star implements Drawable, Movable{
     } else {
       return false;
     }
-    
   }
-  
-  
-  
-  
   
 }

@@ -1,14 +1,36 @@
-class NiceGuy implements Drawable{
+/*class NiceGuyManager{
+ 
+  PVector playerPos;
+  ArrayList<NiceGuy> niceGuysArray;
+  float spawnChance;
+  
+  
+  NiceGuyManager(PVector playerPos){
+     
+     this.playerPos = playerPos;
+     //this.niceGuysArray = new ArrayList<>();
+     this.spawnChance = 0.01;
+    
+  }
+  
+  
+  
+  
+}
+
+class NiceGuy implements Drawable, Movable{
   
   private PVector pos;
   private PVector playerPos;
   private int health;
+  private float speed;
   
   NiceGuy(PVector playerPos){
     
    this.playerPos = playerPos;
    this.pos = randomPos();
    this.health = 3;
+   this.speed = 3;
    
   }
   
@@ -52,6 +74,17 @@ class NiceGuy implements Drawable{
     rect(pos.x, pos.y, 30, 30);
   }
   
+  public void move(){
+    
+    if(health <= 0) this.reset();
+    
+     this.pos.add( (this.playerPos.copy().sub(this.pos.copy())).normalize().mult(this.speed));
+    
+  }
+  
+  
+
   
   
 }
+*/

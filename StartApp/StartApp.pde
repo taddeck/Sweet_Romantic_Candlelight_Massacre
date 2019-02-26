@@ -51,7 +51,11 @@ public void draw(){
        muffi.speed = dir.mult(-this.acc);
        this.shootCount = 0;
        
-       drawables.add(new NiceGuy(muffi.pos));
+       /*NiceGuy ng = new NiceGuy(muffi.pos);
+       drawables.add(ng);
+       movables.add(ng);
+       */
+       
      
     }
     
