@@ -1,15 +1,23 @@
-/*class NiceGuyManager{
+class NiceGuyManager{
  
   PVector playerPos;
-  ArrayList<NiceGuy> niceGuysArray;
   float spawnChance;
   
   
-  NiceGuyManager(PVector playerPos){
+  NiceGuyManager(float spawnChance){
      
-     this.playerPos = playerPos;
-     //this.niceGuysArray = new ArrayList<>();
-     this.spawnChance = 0.01;
+     this.spawnChance = spawnChance;
+  }
+  
+  
+  public void spawn(){
+  
+    if(random(0, 100) <= this.spawnChance){
+      
+       NiceGuy ng = new NiceGuy(muffi.pos);
+       drawables.add(ng);
+       movables.add(ng);
+    }
     
   }
   
@@ -24,13 +32,13 @@ class NiceGuy implements Drawable, Movable{
   private PVector playerPos;
   private int health;
   private float speed;
+  private PVector targetPos;
   
   NiceGuy(PVector playerPos){
     
    this.playerPos = playerPos;
-   this.pos = randomPos();
-   this.health = 3;
-   this.speed = 3;
+   this.reset();
+   this.targetPos = playerPos.copy().add(muffi.speed.copy().normalize().mult(pos.dist(this.playerPos)));
    
   }
   
@@ -76,15 +84,27 @@ class NiceGuy implements Drawable, Movable{
   
   public void move(){
     
-    if(health <= 0) this.reset();
+    //position infront of the player
+    this.targetPos = playerPos.copy().add(muffi.speed.copy().mult( (pos.dist(this.playerPos) / 1.5 )));
     
-     this.pos.add( (this.playerPos.copy().sub(this.pos.copy())).normalize().mult(this.speed));
+    if(this.health <= 0 || pos.dist(muffi.pos) > width * 2) this.reset();
+    
+    this.pos.add( (this.targetPos.copy().sub(this.pos.copy())).normalize().mult(this.speed));
     
   }
+  
+  private void reset(){
+    
+   this.pos = randomPos();
+   this.health = 3;
+   this.speed = 3;
+    
+  }
+  
+  
   
   
 
   
   
 }
-*/

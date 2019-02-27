@@ -8,9 +8,11 @@ float raff,gaff,baff;
 private int shootCount;
 private int fireRate;
 private float acc;
+NiceGuyManager ngm;
 
 public void setup(){
   size(2000, 1500);
+  blendMode(ADD);
   img = loadImage("herzchen.png");
   smooth();
   muffi = new CuddleMuffin();
@@ -25,6 +27,7 @@ public void setup(){
   movables.add(muffi);
   
   new Stars(400, muffi.pos);
+  ngm = new NiceGuyManager(1);
   
   dir = new PVector(0,0);
 }
@@ -32,13 +35,18 @@ public void setup(){
 public void draw(){
   background(0);
   translate(-muffi.pos.x + width / 2 ,-muffi.pos.y + height / 2);
-  roff+=0.5;
-  boff+=0.5;
-  goff+=0.5;
-  raff = noise(roff);
-  baff = noise(boff);
-  gaff = noise(goff);
   setWeapon("Earth");
+  ngm.spawn();
+  
+  for(Movable movable: movables){
+     movable.move();
+   }
+  
+
+   for(Drawable sprite: drawables){
+    sprite.display();
+   }
+  
   
   if(mousePressed){
         
@@ -51,33 +59,15 @@ public void draw(){
        muffi.speed = dir.mult(-this.acc);
        this.shootCount = 0;
        
-       /*NiceGuy ng = new NiceGuy(muffi.pos);
-       drawables.add(ng);
-       movables.add(ng);
-       */
        
-     
     }
     
     
     
   }
-
-   this.shootCount++;
-   for(Movable movable: movables){
-     movable.move();
-   }
-  
-
-   for(Drawable sprite: drawables){
-    sprite.display();
-   }
-
-
-   for(Movable movable: movables){
-     movable.move();
-   }
+  this.shootCount++;
    
+
    for(Projectile proj : projec){
      proj.display();
      proj.move();
