@@ -2,10 +2,11 @@ class NiceGuyManager{
  
   PVector playerPos;
   float spawnChance;
-  
+  float spawnrateIncrease;
   
   NiceGuyManager(float spawnChance){
      
+     this.spawnrateIncrease = 1.00002;
      this.spawnChance = spawnChance;
   }
   
@@ -17,7 +18,10 @@ class NiceGuyManager{
        NiceGuy ng = new NiceGuy(muffi.pos);
        drawables.add(ng);
        movables.add(ng);
+       
     }
+    
+    this.spawnChance *= this.spawnrateIncrease;
     
   }
   
@@ -85,7 +89,7 @@ class NiceGuy implements Drawable, Movable{
   public void move(){
     
     //position infront of the player
-    this.targetPos = playerPos.copy().add(muffi.speed.copy().mult( (pos.dist(this.playerPos) / 1.5 )));
+    this.targetPos = playerPos.copy().add(muffi.speed.copy().normalize().mult( (pos.dist(this.playerPos) / 1.5 )));
     
     if(this.health <= 0 || pos.dist(muffi.pos) > width * 2) this.reset();
     
@@ -100,6 +104,9 @@ class NiceGuy implements Drawable, Movable{
    this.speed = 3;
     
   }
+  
+  
+  
   
   
   

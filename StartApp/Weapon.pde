@@ -112,6 +112,18 @@ class Projectile implements Drawable,Movable{
     return this.postiones;
   }
   
+  public boolean outOfRange(PVector pos){
+   
+    if(this.postiones.x > pos.x + (width * 3) || this.postiones.x < pos.x - (width * 3)
+        || this.postiones.y > pos.y + (height * 3) || this.postiones.y < pos.y - (height * 3)){
+      return true;
+    } else {
+      return false;
+    }
+    
+  }
+  
+    
 }
 
 

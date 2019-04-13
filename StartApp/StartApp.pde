@@ -1,4 +1,4 @@
-  CuddleMuffin muffi;
+public CuddleMuffin muffi;
 ArrayList<Drawable> drawables = new ArrayList<Drawable>();
 ArrayList<Movable> movables = new ArrayList<Movable>();
 ArrayList<Projectile> projec = new ArrayList<Projectile>();
@@ -59,19 +59,28 @@ public void draw(){
        muffi.speed = dir.mult(-this.acc);
        this.shootCount = 0;
        
-       
     }
     
     
     
   }
   this.shootCount++;
+  
+  
+   for(int i = 0; i < projec.size(); i++){
+    
+     projec.get(i).display();
+     projec.get(i).move();
+     
+     if(projec.get(i).outOfRange(muffi.pos)){
+       projec.remove(i);
+     }
+     
+   }
    
 
-   for(Projectile proj : projec){
-     proj.display();
-     proj.move();
-   }
+
+  println(projec.size());
 
 }
   PVector dir;

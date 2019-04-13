@@ -6,7 +6,7 @@ float speedyspeed = 0.001;
 float speedyspeedreducer = 100;
 int size = 20;
 float speedreducerino = 1;
-int lebensenergiebalkenzuverfuegung = 5;
+int health = 5;
 public boolean isLeft, isRight, isUp, isDown;
 public CuddleMuffin(){
   pos = new PVector(0,0);

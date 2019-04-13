@@ -48,29 +48,30 @@ class Star implements Drawable, Movable{
     
     PVector posi = new PVector(7000, 7000);
     double chance = random(4);
+    int offset = width / 2;
     
     if(chance < 1){
       //right
-      float px = this.playerPos.x + ((width / 2) + 40); 
+      float px = this.playerPos.x + ((width / 2) + random(offset)); 
       float py = this.playerPos.y + random(-(height / 2), (height / 2));
       posi.set(px, py);
       
     } else if(chance >= 1 && chance < 2){
       //left
-      float px = this.playerPos.x - ((width / 2) + 40); 
+      float px = this.playerPos.x - ((width / 2) + random(offset)); 
       float py = this.playerPos.y + random(-(height / 2), (height / 2));
       posi.set(px, py);
       
     } else if(chance >= 2 && chance < 3){
       //up
       float px = this.playerPos.x + random(-(width / 2), (width / 2));
-      float py = this.playerPos.y + (height / 2 + 40);
+      float py = this.playerPos.y + (height / 2 + random(offset));
       posi.set(px, py);
       
     } else if(chance > 3){
       //down
       float px = this.playerPos.x + random(-(width / 2), (width / 2));
-      float py = this.playerPos.y - (height / 2 + 40);
+      float py = this.playerPos.y - (height / 2 + random(offset));
       posi.set(px, py);
     }
     
@@ -84,7 +85,6 @@ class Star implements Drawable, Movable{
     
     fill(255);
     ellipse(this.pos.x, this.pos.y, this.depth, this.depth);
-    
   }
   
   void move(){
